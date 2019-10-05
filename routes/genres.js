@@ -45,8 +45,6 @@ router.get('/:id', async (req, res) => {
 //     res.send(req.query);
 // });
 
-
-// post request test. each post will return a response with the genre data inreasesd by.
 // this can be tested in postman.
 router.post('/', async (req, res) => {
 
