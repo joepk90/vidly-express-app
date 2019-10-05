@@ -99,9 +99,8 @@ router.put('/:id', async (req, res) => {
 
         // update a document and return it
         genre = await Genre.findByIdAndUpdate( req.params.id, { name: req.body.name }, {
-        new: true
-
-    });
+            new: true
+        });
 
     } catch(ex) {
 
