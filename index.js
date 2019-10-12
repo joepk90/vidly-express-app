@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const rentals = require('./routes/rentals');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const movies = require('./routes/movies');
@@ -16,9 +17,11 @@ app.use(express.json());
 
 // routes
 app.use('/', home);
+app.use('/api/rentals', rentals);
 app.use('/api/genres', genres);
 app.use('/api/customers', customers);
 app.use('/api/movies', movies);
+
 
 // $ export PORT=5000
 const port = process.env.PORT || 3000

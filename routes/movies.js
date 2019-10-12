@@ -85,7 +85,7 @@ router.put('/:id', async (req, res) => {
 
         // update a document and return it
         movie = await Movie.findByIdAndUpdate( req.params.id, { 
-            name: req.body.name,
+            title: req.body.title,
             genre: req.body.genre,
             numberInStock: req.body.numberInStock,
             dailyRentalRate: req.body.dailyRentalRate
