@@ -30,3 +30,20 @@ app.listen(port, () => console.log(`listening on port ${port}...`))
 // app.post();
 // app.put();
 // app.delete();
+
+
+
+
+
+const functionForTests = async function () {
+
+    const { Movie } = require('./models/movie');
+
+    const movie = await Movie.findById("5d99dbaf805bab394e8d0d61");
+
+    console.log(movie);
+
+} 
+
+
+// functionForTests();
