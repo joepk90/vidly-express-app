@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// Fawn library uses ojlintaskcollections collection in mongodb to perform two phase commits
 const Fawn = require('fawn');
 const express = require('express');
 const router = express.Router();
