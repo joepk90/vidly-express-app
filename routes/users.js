@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -42,16 +43,26 @@ router.post('/', async (req, res) => {
         return res.status(400).send('User already registered.');
     }
 
-    user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    });
+    user = new User((_.pick(req.body, ['name', 'email', 'password'])));
+
+    // or use
+    // user = new User({
+    //     name: req.body.name,
+    //     email: req.body.email,
+    //     password: req.body.password
+    // }); 
 
     try {
 
         await user.save();
-        res.send(user);
+
+        res.send(_.pick(user, ['_id', 'name', 'email']));
+
+        // or use the following
+        // res.send({
+        //     name: req.body.name,
+        //     email: req.body.email,
+        // });
 
     } catch(ex) {
 
