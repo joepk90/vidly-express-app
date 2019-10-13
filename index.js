@@ -3,6 +3,7 @@ const express = require('express');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
+const users = require('./routes/users');
 const rentals = require('./routes/rentals');
 const genres = require('./routes/genres');
 const customers = require('./routes/customers');
@@ -20,6 +21,7 @@ app.use(express.json());
 
 // routes
 app.use('/', home);
+app.use('/api/users', users);
 app.use('/api/rentals', rentals);
 app.use('/api/genres', genres);
 app.use('/api/customers', customers);
