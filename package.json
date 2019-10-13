@@ -16,6 +16,7 @@
     "fawn": "^2.1.5",
     "helmet": "^3.9.0",
     "joi": "^13.1.0",
+    "joi-objectid": "^3.0.1",
     "mongoose": "^5.0.2",
     "morgan": "^1.9.0",
     "nodemon": "^1.19.2",

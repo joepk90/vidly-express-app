@@ -42,7 +42,7 @@ function validateMovie(movie) {
         // Joi validation intentionally differs from Mongoose Schema
         // The Post request requires an ID, wheares the schema should require the Genre Schema
         // The Genre object needs to be queried using the ID before the movie can be saved
-        genreId: Joi.string().required(), 
+        genreId: Joi.objectId().required(), 
         numberInStock: Joi.number().min(0).max(255).required(),
         dailyRentalRate: Joi.number().min(0).max(255).required()
     }

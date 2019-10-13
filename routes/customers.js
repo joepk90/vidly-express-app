@@ -44,11 +44,10 @@ router.post('/', async (req, res) => {
         isGold: req.body.isGold
     });
 
-    let customerResult = null;
-
     try {
 
-        customerResult = await customer.save();
+        const customerResponse = await customer.save();
+        res.send(customerResponse);
 
     } catch(ex) {
 
@@ -57,8 +56,6 @@ router.post('/', async (req, res) => {
         }
 
     }
-    
-    res.send(customerResult);
 
 });
 

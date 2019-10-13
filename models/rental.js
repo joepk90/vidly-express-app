@@ -42,8 +42,8 @@ function validateRental(rental) {
 
     // validation using joi dependancy
     const schema = {
-        movieId: Joi.string().required(), // only a string is required as all we need is the movie id
-        customerId: Joi.string().required(),  // only a string is required as all we need is the customer id
+        movieId: Joi.objectId().required(), // only an objectId is required
+        customerId: Joi.objectId().required(),  // only an objectId is required
     }
 
     return Joi.validate(rental, schema);

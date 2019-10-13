@@ -53,11 +53,10 @@ router.post('/', async (req, res) => {
         dailyRentalRate: req.body.dailyRentalRate
     });
 
-    let movieResult = null;
-
     try {
 
-        movieResult = await movie.save();
+        await movie.save();
+        res.send(movie);
 
     } catch(ex) {
 
@@ -67,7 +66,7 @@ router.post('/', async (req, res) => {
 
     }
     
-    res.send(movieResult);
+   
 
 });
 

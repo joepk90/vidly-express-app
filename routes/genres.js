@@ -56,11 +56,10 @@ router.post('/', async (req, res) => {
         name: req.body.name
     });
 
-    let genreResult = null;
-
     try {
 
-        genreResult = await genre.save();
+        await genre.save();
+        res.send(genre);
 
     } catch(ex) {
 
@@ -69,8 +68,6 @@ router.post('/', async (req, res) => {
         }
 
     }
-    
-    res.send(genreResult);
 
 });
 
