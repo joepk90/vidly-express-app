@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middleware/auth');
 const { Customer, validateCustomer } = require('../models/customer');
 
 // return all customer
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // this can be tested in postman.
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateCustomer(req.body);
@@ -60,7 +61,7 @@ router.post('/', async (req, res) => {
 });
 
 // example PUT request
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateCustomer(req.body);
@@ -95,7 +96,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete customer
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 
     let customer = null;
 

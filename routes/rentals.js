@@ -4,6 +4,7 @@ const Fawn = require('fawn');
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middleware/auth');
 const { Rental, validateRental } = require('../models/rental');
 const { Movie } = require('../models/movie');
 const { Customer } = require('../models/customer');
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
     res.send(rental);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateRental(req.body);
@@ -98,7 +99,7 @@ router.get('/:id', async (req, res) => {
 
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateRental(req.body);
@@ -135,7 +136,7 @@ router.put('/:id', async (req, res) => {
 
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 
     let rental = null;
 

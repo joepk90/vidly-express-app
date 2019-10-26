@@ -73,7 +73,7 @@ router.post('/', auth, async (req, res) => {
 });
 
 // example PUT request
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateGenre(req.body);
@@ -106,7 +106,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete genre
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 
     let genre = null;
 

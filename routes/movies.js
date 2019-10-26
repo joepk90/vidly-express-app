@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 const { Movie, validateMovie } = require('../models/movie');
 const { Genre } = require('../models/genre');
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res) => {
 
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateMovie(req.body);
@@ -70,7 +71,7 @@ router.post('/', async (req, res) => {
 
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
 
     // object destructoring
     const { error } = validateMovie(req.body);
@@ -107,7 +108,7 @@ router.put('/:id', async (req, res) => {
 
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
 
     let movie = null;
 
