@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 function auth(req, res, next) {
 
-    const token = req.header('z-auth-header');
+    const token = req.header('x-auth-token');
 
     if (!token) {
         return res.status(401).send('Access denied. No token provided');;
@@ -11,8 +11,11 @@ function auth(req, res, next) {
 
     try {
 
-        const isTokenValid = jwt.verify(token, config.get('jwtPrivateKey'));
-        req.user = doceded;
+        // get user data created by the generateAuthToken
+        const user = jwt.verify(token, config.get('jwtPrivateKey'));
+
+         // assign user data to the request object
+        req.user = user;
 
         // pass control to the next middleware funtion
         next();

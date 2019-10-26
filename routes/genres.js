@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 const { Genre, validateGenre } = require('../models/genre');
 
@@ -38,7 +39,7 @@ router.get('/:id', async (req, res) => {
 // });
 
 // this can be tested in postman.
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     // basic validation example
     // if (!req.body.name || req.body.name.length < 3) {
@@ -49,7 +50,7 @@ router.post('/', async (req, res) => {
     // object destructoring
     const { error } = validateGenre(req.body);
     if (error) {
-        return res.status(400 ).send(error.details[0].message);
+        return res.status(400).send(error.details[0].message);
     }
 
     const genre = new Genre({
