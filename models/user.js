@@ -1,3 +1,5 @@
+const config = require('config');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const JoiPasswordComplexity = require('joi-password-complexity');
@@ -30,6 +32,18 @@ const userSchemaProperties = {
 }
 
 const userSchema = new mongoose.Schema(userSchemaProperties);
+
+// extends the Mongoose schema and creates a new method within the user model
+// usage: user.generateAuthKey();
+// cannot use arrow functin here (() => {}) as {this} will reference the calling function when run, not the user object
+userSchema.methods.generateAuthToken = function() {
+
+    return jwt.sign(
+        {_id: this._id},
+        config.get('jwtPrivateKey')
+    );
+
+}
 
 const User = mongoose.model( 'User', userSchema );
 
