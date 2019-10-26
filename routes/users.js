@@ -29,6 +29,27 @@ router.get('/:id', async (req, res) => {
 
 });
 
+
+// return current user using jsonwebtoken
+router.get('/me', auth, async (req, res) => {
+
+    // extra check
+    // if (!req.user._id) return res.header(401).send('Something wrong - unable to determine user');  
+
+    // get user ID from json web token
+    const user = await User.findById(req.user._id).select('-password'); // exclude password
+
+    // if user id does not exist return 404
+    if(!user) {
+        return res.status(404).send('The user with the given ID was not found.')
+    }
+
+    // else return the user data
+    res.send(user); 
+
+});
+
+
 // this can be tested in postman.
 router.post('/', async (req, res) => {
 
