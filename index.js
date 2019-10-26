@@ -3,6 +3,7 @@ const express = require('express');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
+const auth = require('./routes/auth');
 const users = require('./routes/users');
 const rentals = require('./routes/rentals');
 const genres = require('./routes/genres');
@@ -26,6 +27,7 @@ app.use('/api/rentals', rentals);
 app.use('/api/genres', genres);
 app.use('/api/customers', customers);
 app.use('/api/movies', movies);
+app.use('/api/auth', auth);
 
 
 // $ export PORT=5000
