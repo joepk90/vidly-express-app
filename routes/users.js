@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middleware/auth');
 const { User, validateUser } = require('../models/user');
 
-// return all user
+// return all user - TODO setup with new auth function. only return data if  user is admin
 router.get('/', async (req, res) => {
 
     const user = await User.find().sort('name');
@@ -14,7 +15,8 @@ router.get('/', async (req, res) => {
     res.send(user);
 });
 
-// return user by id
+
+// return user by id - TODO setup with new auth function. only return data if  user is admin
 router.get('/:id', async (req, res) => {
 
     const user = await User.findById(req.param.id);
@@ -102,7 +104,7 @@ router.post('/', async (req, res) => {
 
 });
 
-// example PUT request
+// example PUT request - TODO setup with new auth function. only return data if user is admin is current user
 router.put('/:id', async (req, res) => {
 
     // object destructoring
@@ -137,7 +139,7 @@ router.put('/:id', async (req, res) => {
 
 });
 
-// delete user
+// delete user - TODO setup with new auth function. only return data if user is admin is current user
 router.delete('/:id', async (req, res) => {
 
     let user = null;
