@@ -17,19 +17,19 @@ router.get('/', async (req, res) => {
 
 
 // return user by id - TODO setup with new auth function. only return data if  user is admin
-router.get('/:id', async (req, res) => {
+// router.get('/:id', async (req, res) => {
 
-    const user = await User.findById(req.param.id);
+//     const user = await User.findById(req.param.id);
 
-    // if user id does not exist return 404
-    if(!user) {
-        return res.status(404).send('The user with the given ID was not found.')
-    }
+//     // if user id does not exist return 404
+//     if(!user) {
+//         return res.status(404).send('The user with the given ID was not found.')
+//     }
 
-    // else return the user data
-    res.send(user); 
+//     // else return the user data
+//     res.send(user); 
 
-});
+// });
 
 
 // return current user using jsonwebtoken
