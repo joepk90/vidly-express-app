@@ -24,6 +24,10 @@ const userSchemaProperties = {
         minlength: 3,
         maxlength: 1024
     },
+    isAdmin: {
+        type: Boolean,
+        default: false 
+    }
     // role: {
     //     type: String,
     //     required: true,
@@ -39,7 +43,10 @@ const userSchema = new mongoose.Schema(userSchemaProperties);
 userSchema.methods.generateAuthToken = function() {
 
     return jwt.sign(
-        {_id: this._id},
+        {
+            _id: this._id,
+            isAdmin: this.isAdmin
+        },
         config.get('jwtPrivateKey')
     );
 

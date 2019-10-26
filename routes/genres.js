@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
 const { Genre, validateGenre } = require('../models/genre');
 
@@ -53,6 +54,7 @@ router.post('/', auth, async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
+    // TODO make name unique (decapitilise new submission and existing data)
     const genre = new Genre({
         name: req.body.name
     });
@@ -106,7 +108,7 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 // delete genre
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
 
     let genre = null;
 
