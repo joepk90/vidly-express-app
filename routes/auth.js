@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const Joi = require('joi');
@@ -54,7 +55,12 @@ router.post('/', async (req, res) => {
         return res.status(400).send('Invalid email or password.');
     }
 
-    res.send(true);
+    const token = jwt.sign(
+        {_id: user._id},
+        'jwtPrivateKey'
+        );
+
+    res.send(token);
 
     // user = new User((_.pick(req.body, ['name', 'email', 'password'])));
     // const salt = await bcrypt.genSalt(10);
