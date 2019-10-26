@@ -24,3 +24,5 @@ to get a users jsonwebtoken, use the user/me endpoint. use the following details
 | jsonwebtoken | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI0NWRkMmU2ODE0MTFmMWFlN2Q2ZjciLCJpYXQiOjE1NzIxMDE1ODZ9.Az1SaxD3UGpYRvbZ7SfwQf7UwOl53VY1D-sDjUCy1fE |
 
 add the jsonwebtoken as an x-auth-token header key, to make user or admin requests.
+
+use https://jwt.io/ to test valid json web tokens
