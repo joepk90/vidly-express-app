@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bcrypt": "^3.0.6",
     "config": "^1.29.2",
     "debug": "^3.1.0",
     "express": "^4.16.2",
