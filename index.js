@@ -1,6 +1,7 @@
 require('express-async-errors'); // handles async errors (see custom middleware async.js module)
 
 const winston = require('winston');
+require('winston-mongodb');
 
 // config
 const config = require('config');
@@ -21,6 +22,21 @@ const error = require('./middleware/error');
 const app = express();
 
 winston.add(winston.transports.File, {filename: 'logfile.log'});
+
+    // winston error levels:
+    // error
+    // warn
+    // info
+    // verbose
+    // debug
+    // silly
+
+winston.add(winston.transports.MongoDB, {
+    db: 'mongodb://localhost/vidly',
+    level: 'error' // only log errros to the mongodb DB
+    // level: 'info' // if info is set, info, warn and error messages would be logged to the mongodb DB 
+    // level: 'silly' // if silly is set, all errors would be logged to mongodb DB 
+});
 
  // testing purposes jwtPrivateKey = 1234 (mapped through custom environment variables)
  // run export vidly_jwtPrivateKey=1234
