@@ -25,11 +25,12 @@ module.exports = function() {
     // note: errors thrown outside of express won't be saved to the logfile or db without the following code.
     // the folowing code used winston to catch any uncaughtException produced by node
     winston.handleExceptions(
+        new winston.transports.Console({colorize: true, prettyPrint: true}),
         new winston.transports.File({filename: 'uncaughtExceptions.log'})
     );
 
     // uncomment the following line to test an error run outside of the context of express: 
-    // throw new Error('Error: this error is outside th e context of express and wont be saved to the logfile or db')
+    // throw new Error('this error is outside the context of express and wont be saved to the logfile or db')
 
 
     // note: errors unhandled rejectoins (syncrynouse code/Promises) thrown outside of express won't be saved to the logfile or db without the following code.
