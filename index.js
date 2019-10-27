@@ -1,5 +1,7 @@
 require('express-async-errors'); // handles async errors (see custom middleware async.js module)
 
+const winston = require('winston');
+
 // config
 const config = require('config');
 
@@ -17,6 +19,8 @@ const movies = require('./routes/movies');
 const home = require('./routes/home');
 const error = require('./middleware/error');
 const app = express();
+
+winston.add(winston.transports.File, {filename: 'logfile.log'});
 
  // testing purposes jwtPrivateKey = 1234 (mapped through custom environment variables)
  // run export vidly_jwtPrivateKey=1234
