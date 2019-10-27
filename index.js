@@ -38,6 +38,15 @@ winston.add(winston.transports.MongoDB, {
     // level: 'silly' // if silly is set, all errors would be logged to mongodb DB 
 });
 
+// note: errors thrown outside of express won't be saved to the logfile or db without the following code:
+process.on('uncaughtException', (ex) => {
+    console.log('ERROR: applicaton produced uncaught exception');
+    winston.error(ex.message, ex);
+} )
+
+// uncomment the following line to test an error run outside of the context of express: 
+// throw new Error('Error: this error is outside the context of express and wont be saved to the logfile or db')
+
  // testing purposes jwtPrivateKey = 1234 (mapped through custom environment variables)
  // run export vidly_jwtPrivateKey=1234
 if (!config.get('jwtPrivateKey')) {
