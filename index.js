@@ -1,3 +1,5 @@
+require('express-async-errors'); // handles async errors (see custom middleware async.js module)
+
 // config
 const config = require('config');
 
