@@ -38,20 +38,35 @@ winston.add(winston.transports.MongoDB, {
     // level: 'silly' // if silly is set, all errors would be logged to mongodb DB 
 });
 
-// note: errors thrown outside of express won't be saved to the logfile or db without the following code:
+// note: errors thrown outside of express won't be saved to the logfile or db without the following code.
+// the folowing code manually subscribes to any uncaughtException produced by node
 process.on('uncaughtException', (ex) => {
     console.log('ERROR: applicaton produced uncaught exception');
     winston.error(ex.message, ex);
+    process.exit(1); // exit application
 } )
 
 // uncomment the following line to test an error run outside of the context of express: 
-// throw new Error('Error: this error is outside the context of express and wont be saved to the logfile or db')
+// throw new Error('Error: this error is outside th e context of express and wont be saved to the logfile or db')
+
+// note: errors unhandled rejectoins (syncrynouse code/Promises) thrown outside of express won't be saved to the logfile or db without the following code.
+// the folowing code manually subscribes to any unhandledRejection produced by node
+process.on('unhandledRejection', (ex) => {
+    console.log('ERROR: applicaton produced an unhandled promise rejection');
+    winston.error(ex.message, ex);
+    // process.exit(1); // exit application
+} )
+
+// uncomment the following l2 lines to test an unhandledRejection run outside of the context of express: 
+// const promiseError = Promise.reject(new Error('example promise error'));
+// promiseError.then( () => console.log('done')); // no catch statement setup so error will be produced
+
 
  // testing purposes jwtPrivateKey = 1234 (mapped through custom environment variables)
  // run export vidly_jwtPrivateKey=1234
 if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined');
-    process.exit(1);
+    // process.exit(1); // exit application
 }
 
 mongoose.connect('mongodb://localhost/vidly')
