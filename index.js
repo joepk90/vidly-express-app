@@ -13,10 +13,11 @@ const genres = require('./routes/genres');
 const customers = require('./routes/customers');
 const movies = require('./routes/movies');
 const home = require('./routes/home');
+const error = require('./middleware/error');
 const app = express();
 
  // testing purposes jwtPrivateKey = 1234 (mapped through custom environment variables)
- // run vidly_jwtPrivateKey=1234
+ // run export vidly_jwtPrivateKey=1234
 if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined');
     process.exit(1);
