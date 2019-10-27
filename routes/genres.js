@@ -3,26 +3,21 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
+const asyncMiddleware = require('../middleware/async');
 
 const { Genre, validateGenre } = require('../models/genre');
 
+
+
 // return all genres
-router.get('/', async (req, res, next) => {
+router.get('/', asyncMiddleware( async(req, res, next) => {
+    const genres = await Genre.find().sort('name');
+    res.send(genres);
 
-
-    try {
-
-        const genres = await Genre.find().sort('name');
-        res.send(genres);
-
-    } catch(ex) {
-        next();
-    }
-    
-});
+}));
 
 // return genre by id
-router.get('/:id', async (req, res) => {
+router.get('/:id', asyncMiddleware( async(req, res) => {
 
     const genre = await Genre.findById(req.param.id);
 
@@ -34,7 +29,7 @@ router.get('/:id', async (req, res) => {
     // else return the genre data
     res.send(genre); 
 
-});
+}));
 
 // example date params
 // router.get('/api/posts/:year/:month', (req, res) => {
@@ -47,7 +42,7 @@ router.get('/:id', async (req, res) => {
 // });
 
 // this can be tested in postman.
-router.post('/', auth, async (req, res) => {
+router.post('/', auth, asyncMiddleware( async(req, res) => {
 
     // basic validation example
     // if (!req.body.name || req.body.name.length < 3) {
@@ -79,10 +74,10 @@ router.post('/', auth, async (req, res) => {
 
     }
 
-});
+}));
 
 // example PUT request
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', auth, asyncMiddleware( async(req, res) => {
 
     // object destructoring
     const { error } = validateGenre(req.body);
@@ -112,10 +107,10 @@ router.put('/:id', auth, async (req, res) => {
 
     res.send(genre);
 
-});
+}));
 
 // delete genre
-router.delete('/:id', [auth, admin], async (req, res) => {
+router.delete('/:id', [auth, admin], asyncMiddleware( async(req, res) => {
 
     let genre = null;
 
@@ -137,6 +132,6 @@ router.delete('/:id', [auth, admin], async (req, res) => {
     // return genre that has been deleted
     res.send(genre); 
 
-});
+}));
 
 module.exports = router;
