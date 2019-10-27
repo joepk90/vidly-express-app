@@ -1,5 +1,8 @@
 const winston = require('winston');
 
+// note: this funciton is only run in the context of express.
+// if any errors occur outside of express, this logic will not cathch them...
+// see winston.handleExceptions function for error handling outside of express
 module.exports = function(err, req, res, next) {
 
     // winston.log('error: ' + err.message); // alternative way of loggin errors
