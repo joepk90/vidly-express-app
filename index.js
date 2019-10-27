@@ -39,22 +39,22 @@ winston.add(winston.transports.MongoDB, {
 });
 
 // note: errors thrown outside of express won't be saved to the logfile or db without the following code.
-// the folowing code manually subscribes to any uncaughtException produced by node
-process.on('uncaughtException', (ex) => {
-    console.log('ERROR: applicaton produced uncaught exception');
-    winston.error(ex.message, ex);
-    process.exit(1); // exit application
-} )
+// the folowing code used winston to catch any uncaughtException produced by node
+winston.handleExceptions(
+    new winston.transports.File({filename: 'uncaughtExceptions.log'})
+);
 
 // uncomment the following line to test an error run outside of the context of express: 
 // throw new Error('Error: this error is outside th e context of express and wont be saved to the logfile or db')
+
 
 // note: errors unhandled rejectoins (syncrynouse code/Promises) thrown outside of express won't be saved to the logfile or db without the following code.
 // the folowing code manually subscribes to any unhandledRejection produced by node
 process.on('unhandledRejection', (ex) => {
     console.log('ERROR: applicaton produced an unhandled promise rejection');
-    winston.error(ex.message, ex);
-    // process.exit(1); // exit application
+
+    // following code uses winstons handleExceptions method to log error
+    throw ex;
 } )
 
 // uncomment the following l2 lines to test an unhandledRejection run outside of the context of express: 
