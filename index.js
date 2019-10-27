@@ -39,6 +39,8 @@ app.use('/api/customers', customers);
 app.use('/api/movies', movies);
 app.use('/api/auth', auth);
 
+// error handler - must be registered after the routes
+app.use(error);
 
 // $ export PORT=5000
 const port = process.env.PORT || 3000
