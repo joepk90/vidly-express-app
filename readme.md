@@ -12,14 +12,14 @@ to get a users jsonwebtoken, use the user/me endpoint. use the following details
 | Key | Value |
 | ------ | ------ |
 | email | johnsmith@gmail.com |
-| password | password1234 |
+| password | Password1234 |
 | isAdmin | false |
 | jsonwebtoken | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI0MTk2OGNhNzc2OTE3NzhhNGIxZTMiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTcyMTAyOTU4fQ.lg69Btu39DtzhNS7QGN-iwqjBtLFuPHqUPfJCqJpXZ8 |
 
 | Key | Value |
 | ------ | ------ |
 | email | joe@gmail.com |
-| password | password1234 |
+| password | Password1234 |
 | isAdmin | true |
 | jsonwebtoken | eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGI0NWRkMmU2ODE0MTFmMWFlN2Q2ZjciLCJpYXQiOjE1NzIxMDE1ODZ9.Az1SaxD3UGpYRvbZ7SfwQf7UwOl53VY1D-sDjUCy1fE |
 
