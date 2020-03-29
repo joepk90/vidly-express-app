@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 // return user by id
 router.get('/:id', async (req, res) => {
 
-    const user = await User.findById(req.param.id);
+    const user = await User.findById(req.params.id);
 
     // if user id does not exist return 404
     if(!user) {

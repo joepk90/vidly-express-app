@@ -87,7 +87,7 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    const rental = await Rental.findById(req.param.id);
+    const rental = await Rental.findById(req.params.id);
 
     // if rental id does not exist return 404
     if(!rental) {

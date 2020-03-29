@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
 
-    const movie = await Movie.findById(req.param.id);
+    const movie = await Movie.findById(req.params.id);
 
     // if movie id does not exist return 404
     if(!movie) {

@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // return customer by id
 router.get('/:id', async (req, res) => {
 
-    const customer = await Customer.findById(req.param.id);
+    const customer = await Customer.findById(req.params.id);
 
     // if customer id does not exist return 404
     if(!customer) {

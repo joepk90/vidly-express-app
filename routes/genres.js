@@ -18,7 +18,7 @@ router.get('/',  async(req, res, next) => {
 // return genre by id
 router.get('/:id',  async(req, res) => {
 
-    const genre = await Genre.findById(req.param.id);
+    const genre = await Genre.findById(req.params.id);
 
     // if genre id does not exist return 404
     if(!genre) {
