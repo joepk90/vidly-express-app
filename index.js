@@ -17,7 +17,9 @@ validation();
 // $ export PORT=5000
 const port = process.env.PORT || 3000
 
-app.listen(port, () => winston.info(`listening on port ${port}...`))
+const server = app.listen(port, () => winston.info(`listening on port ${port}...`));
 // app.post();
 // app.put();
 // app.delete(); 
+
+module.exports = server;
