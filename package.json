@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "jest --watchAll --verbose",
-    "dev": "nodemon index.js",
-    "dev-test": "NODE_ENV=test nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
