@@ -1,3 +1,4 @@
+const validationObjectId = require('../middleware/validateObjectId')
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -16,11 +17,7 @@ router.get('/',  async(req, res, next) => {
 });
 
 // return genre by id
-router.get('/:id',  async(req, res) => {
-
-    if (mongoose.Types.ObjectId.isValid(req.params.id) === false) {
-        return res.status(404).send('Invalid ID.')
-    };
+router.get('/:id', validationObjectId,  async(req, res) => {
 
     const genre = await Genre.findById(req.params.id);
 
