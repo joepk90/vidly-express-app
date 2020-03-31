@@ -101,5 +101,42 @@ describe('/api/genres/', () => {
 
         });
 
+        it('should save the genre if it is valid', async () => {
+
+            const token = new User().generateAuthToken();
+
+            const name = new Array(52).join('a'); // will equeal 51 characters
+            const genreObject = { name: 'genre' }
+
+
+            const res = await request(server)
+            .post('/api/genres') 
+            .set('x-auth-token', token)
+            .send( genreObject );
+
+            const genre = await Genre.find(genreObject);
+
+            expect(genre).not.toBeNull();
+
+        });
+
+        it('should return the genre if it is valid', async () => {
+
+            const token = new User().generateAuthToken();
+
+            const name = new Array(52).join('a'); // will equeal 51 characters
+            const genreObject = { name: 'genre' }
+
+
+            const res = await request(server)
+            .post('/api/genres') 
+            .set('x-auth-token', token)
+            .send( genreObject );
+
+            expect(res.body).toHaveProperty('_id');
+            expect(res.body).toHaveProperty('name', genreObject.name);
+
+        });
+
     });
 });
