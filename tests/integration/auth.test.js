@@ -2,8 +2,6 @@ const request = require('supertest');
 const { Genre } = require('../../models/genre.js');
 const { User } = require('../../models/user.js');
 
-let server;
-
 describe('auth middleware', () => {
 
     let token;
