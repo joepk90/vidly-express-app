@@ -63,11 +63,29 @@ describe('/api/genres/', () => {
 
     describe('POST /', () => {
 
+        // define the happy path
+        // then in each test change one parameter that clearly aligns with the name of the test
+
+        let token;
+        let name;
+
+        const exec = async () => {
+            return await request(server)
+            .post('/api/genres') 
+            .set('x-auth-token', token)
+            .send( { name });
+        }
+
+        beforeEach(() => {
+            token = new User().generateAuthToken();
+            name = 'genre1';
+        });
+
         it('should return a 401 if client is not logged in', async () => {
 
-            const res = await request(server)
-            .post('/api/genres')
-            .send( { name: 'genre1' } );
+            token = ''; // set token to empty string to disable authentication
+
+            const res = await exec(server);
 
             expect(res.status).toBe(401)
 
@@ -75,12 +93,9 @@ describe('/api/genres/', () => {
 
         it('should return a 400 if genre less than 5 characters', async () => {
 
-            const token = new User().generateAuthToken();
+            name = '1234';
 
-            const res = await request(server)
-            .post('/api/genres') 
-            .set('x-auth-token', token)
-            .send( { name: '1234' } );
+            const res = await exec();
 
             expect(res.status).toBe(400);
 
@@ -88,14 +103,9 @@ describe('/api/genres/', () => {
 
         it('should return a 400 if genre more than 50 characters', async () => {
 
-            const token = new User().generateAuthToken();
+            name = new Array(52).join('a'); // will equeal 51 characters
 
-            const name = new Array(52).join('a'); // will equeal 51 characters
-
-            const res = await request(server)
-            .post('/api/genres') 
-            .set('x-auth-token', token)
-            .send( { name: name } );
+            const res = await exec();
 
             expect(res.status).toBe(400);
 
@@ -103,18 +113,9 @@ describe('/api/genres/', () => {
 
         it('should save the genre if it is valid', async () => {
 
-            const token = new User().generateAuthToken();
+           await exec();
 
-            const name = new Array(52).join('a'); // will equeal 51 characters
-            const genreObject = { name: 'genre' }
-
-
-            const res = await request(server)
-            .post('/api/genres') 
-            .set('x-auth-token', token)
-            .send( genreObject );
-
-            const genre = await Genre.find(genreObject);
+            const genre = await Genre.find({name});
 
             expect(genre).not.toBeNull();
 
@@ -122,19 +123,10 @@ describe('/api/genres/', () => {
 
         it('should return the genre if it is valid', async () => {
 
-            const token = new User().generateAuthToken();
-
-            const name = new Array(52).join('a'); // will equeal 51 characters
-            const genreObject = { name: 'genre' }
-
-
-            const res = await request(server)
-            .post('/api/genres') 
-            .set('x-auth-token', token)
-            .send( genreObject );
+            const res = await exec();
 
             expect(res.body).toHaveProperty('_id');
-            expect(res.body).toHaveProperty('name', genreObject.name);
+            expect(res.body).toHaveProperty('name', name);
 
         });
 
