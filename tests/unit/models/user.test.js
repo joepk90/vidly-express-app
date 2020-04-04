@@ -1,4 +1,4 @@
-const { User } = require('../../models/user.js');
+const { User } = require('../../../models/user.js');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const mongoose = require('mongoose');
@@ -23,5 +23,6 @@ describe('user.generateAuthToken', () => {
         // confirm decoded object matches return generated auth token from the user.generateAuthToken method
         expect(decoded).toMatchObject(payload); 
 
+        
     });
 });
