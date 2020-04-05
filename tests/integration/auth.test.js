@@ -21,8 +21,8 @@ describe('auth middleware', () => {
     });
 
     afterEach( async () => {
-        server.close();
         await Genre.remove({});
+        await server.close();
     });
 
     it('should return 401 if no token is provided', async() => {
