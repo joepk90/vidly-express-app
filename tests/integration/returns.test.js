@@ -109,10 +109,23 @@ describe('/api/returns', () => {
     });
 
     it('should return 200 if request is valid', async () => {
-        
+
         const res = await exec();
 
         expect(res.status).toBe(200)
+
+    });
+
+    it('should set the returnDate if input is valid', async () => {
+        
+        const res = await exec();
+
+        savedRental = await Rental.findById(rental._id);
+
+        // find difference between when dateReturned value was added and the now
+        const diff = new Date() - savedRental.dateReturned;
+
+        expect(diff).toBeLessThan(10 * 1000); // check if time difference is less than 10 seconds 
 
     });
 
