@@ -97,4 +97,15 @@ describe('/api/returns', () => {
 
     });
 
+    it('should return 400 if rental is already processed - return date is already set', async () => {
+
+        rental.dateReturned = new Date();
+        await rental.save();
+
+        const res = await exec();
+
+        expect(res.status).toBe(400)
+
+    });
+
 });
