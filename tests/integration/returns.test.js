@@ -168,4 +168,17 @@ describe('/api/returns', () => {
 
     });
 
+    it('should return the rental object if input is valid', async () => {
+        
+        const res = await exec();
+    
+        // const savedRental = await Rental.findById(rental._id);
+        expect(res.body).toHaveProperty('dateOut');
+        expect(res.body).toHaveProperty('dateReturned');
+        expect(res.body).toHaveProperty('rentalFee');
+        expect(res.body).toHaveProperty('customer');
+        expect(res.body).toHaveProperty('movie');
+
+    });
+
 });
