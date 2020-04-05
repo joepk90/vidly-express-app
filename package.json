@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jest --watchAll --verbose --maxWorkers=1",
+    "test": "jest --watchAll --verbose --maxWorkers=1 --coverage",
     "dev": "nodemon index.js"
   },
   "author": "",

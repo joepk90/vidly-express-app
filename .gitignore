@@ -1,3 +1,5 @@
 node_modules
 logfile.log
 uncaughtExceptions.log
+coverage
+.DS_Store
