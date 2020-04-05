@@ -41,7 +41,7 @@ router.post('/', auth, async (req, res) => {
     if (movie.numberInStock === 0) return res.status(400 ).send('Movie not available');
 
     // todo check Movie and Customer ID are valid
-    // todo check that endDate value is greater than startDate
+    // todo check that endDate value is greater than dateOut
     // todo add logic to calcualte price of rental?
 
 
@@ -56,8 +56,8 @@ router.post('/', auth, async (req, res) => {
             name: customer.name,
             phone: customer.phone
         },
-        startDate: req.body.startDate,
-        endDate: req.body.endDate
+        dateOut: req.body.dateOut,
+        dateIn: req.body.dateIn
     });
 
     try {
@@ -115,8 +115,8 @@ router.put('/:id', auth, async (req, res) => {
         rental = await Rental.findByIdAndUpdate( req.params.id, { 
             movie: req.body.movie,
             customer: req.body.customer,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate
+            dateOut: req.body.dateOut,
+            dateIn: req.body.dateIn
         }, {
             new: true
         });
