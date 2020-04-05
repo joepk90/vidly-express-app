@@ -59,7 +59,7 @@ describe('/api/returns', () => {
     });
 
 
-    it('return 401 if client is not logged in', async () => {
+    it('should return 401 if client is not logged in', async () => {
         
         token = ''; // set token to empty string to disable authentication
         const res = await exec(server);
@@ -68,7 +68,7 @@ describe('/api/returns', () => {
 
     });
 
-    it('return 400 if customerId is not provided', async () => {
+    it('should return 400 if customerId is not provided', async () => {
         
         delete payload.customerId;
         const res = await exec(server);
@@ -83,6 +83,17 @@ describe('/api/returns', () => {
         const res = await exec(server);
 
         expect(res.status).toBe(400)
+
+    });
+
+    it('should return 404 if no rental found for customer/movie combination', async () => {
+        
+        // remove rentals so no rental will be found 
+        await Rental.remove({});
+
+        const res = await exec(server);
+
+        expect(res.status).toBe(404)
 
     });
 
