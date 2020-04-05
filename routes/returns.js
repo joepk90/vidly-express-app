@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send('I am active!');
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
 
     customerId = req.body.customerId;
     movieId = req.body.movieId;
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
     if(rental.dateReturned) return res.status(400).send('return date is set. movie already returned!');
 
-    res.status(401).send('unauthorized');
+    return res.status(200).send('rental found');
 
 });
 

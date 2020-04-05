@@ -108,4 +108,12 @@ describe('/api/returns', () => {
 
     });
 
+    it('should return 200 if request is valid', async () => {
+        
+        const res = await exec();
+
+        expect(res.status).toBe(200)
+
+    });
+
 });
