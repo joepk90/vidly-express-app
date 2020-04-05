@@ -6,6 +6,7 @@ const rentals = require('../routes/rentals');
 const genres = require('../routes/genres');
 const customers = require('../routes/customers');
 const movies = require('../routes/movies');
+const returns = require('../routes/returns');
 const home = require('../routes/home');
 const error = require('../middleware/error');
 
@@ -20,6 +21,7 @@ module.exports = function(app) {
     app.use('/api/genres', genres);
     app.use('/api/customers', customers);
     app.use('/api/movies', movies);
+    app.use('/api/returns', returns);
     app.use('/api/auth', auth);
     
     // error handler - must be registered after the routes
