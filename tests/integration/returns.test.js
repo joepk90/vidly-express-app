@@ -62,7 +62,7 @@ describe('/api/returns', () => {
     it('should return 401 if client is not logged in', async () => {
         
         token = ''; // set token to empty string to disable authentication
-        const res = await exec(server);
+        const res = await exec();
 
         expect(res.status).toBe(401)
 
@@ -71,7 +71,7 @@ describe('/api/returns', () => {
     it('should return 400 if customerId is not provided', async () => {
         
         delete payload.customerId;
-        const res = await exec(server);
+        const res = await exec();
 
         expect(res.status).toBe(400)
 
@@ -80,7 +80,7 @@ describe('/api/returns', () => {
     it('return 400 if movieId is not provided', async () => {
         
         delete payload.movieId;
-        const res = await exec(server);
+        const res = await exec( );
 
         expect(res.status).toBe(400)
 
@@ -91,7 +91,7 @@ describe('/api/returns', () => {
         // remove rentals so no rental will be found 
         await Rental.remove({});
 
-        const res = await exec(server);
+        const res = await exec();
 
         expect(res.status).toBe(404)
 

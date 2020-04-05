@@ -15,12 +15,12 @@ router.post('/', async (req, res) => {
     customerId = req.body.customerId;
     movieId = req.body.movieId;
 
-    if (!customerId) res.status(400).send('no customerId provided');
-    if (!movieId) res.status(400).send('no movieId provided');
+    if (!customerId) return res.status(400).send('no customerId provided');
+    if (!movieId) return res.status(400).send('no movieId provided');
 
     const rental = await Rental.findOne({ "customer._id": customerId, "movie._id": movieId });
 
-    if (!rental) res.status(404).send('no rental found'); 
+    if (!rental) return res.status(404).send('no rental found'); 
 
     res.send(401).send('unauthorized');
 
