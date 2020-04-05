@@ -2,7 +2,7 @@ const request = require('supertest');
 const mongoose = require('mongoose');
 
 const { Rental } = require('../../models/rental');
-// const { User } = require('../../models/user');
+const { User } = require('../../models/user');
 
 describe('/api/returns', () => {
 
@@ -14,8 +14,6 @@ describe('/api/returns', () => {
 
     beforeEach( async () => {
         server = require('../../index');
-
-        // token = new User().generateAuthToken();
 
         customerId = mongoose.Types.ObjectId();
         movieId = mongoose.Types.ObjectId();
@@ -68,6 +66,38 @@ describe('/api/returns', () => {
         .send({customerId, movieId});
 
         expect(res.status).toBe(401)
+
+    });
+
+    it('return 400 if customerId is not provided', async () => {
+        
+        token = new User().generateAuthToken();
+
+        // token = ''; // set token to empty string to disable authentication
+        // const res = await exec(server);
+
+        const res = await request(server)
+        .post('/api/returns')
+        .set('x-auth-token', token)
+        .send({movieId});
+
+        expect(res.status).toBe(400)
+
+    });
+
+    it('return 400 if movieId is not provided', async () => {
+        
+        token = new User().generateAuthToken();
+
+        // token = ''; // set token to empty string to disable authentication
+        // const res = await exec(server);
+
+        const res = await request(server)
+        .post('/api/returns')
+        .set('x-auth-token', token)
+        .send({customerId});
+
+        expect(res.status).toBe(400)
 
     });
 

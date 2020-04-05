@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
+    if (!req.body.customerId) res.send(400).send('no customerId provided');
+    if (!req.body.movieId) res.send(400).send('no movieId provided');
+
     res.send(401).send('unauthorized');
 
 });
