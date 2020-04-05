@@ -17,6 +17,8 @@ describe('/api/returns', () => {
 
         customerId = mongoose.Types.ObjectId();
         movieId = mongoose.Types.ObjectId();
+        token = new User().generateAuthToken();
+        payload = { customerId, movieId }
 
         rental = new Rental({
             customer: {
@@ -40,14 +42,15 @@ describe('/api/returns', () => {
     });
 
     let token;
-    let name;
+    let payload;
+    
 
-    // const exec = async () => {
-    //     return await request(server)
-    //     .post('/api/returns') 
-    //     .set('x-auth-token', token)
-    //     .send( { customerId, movieId });
-    // } 
+    const exec = async () => {
+        return await request(server)
+        .post('/api/returns') 
+        .set('x-auth-token', token)
+        .send( payload );
+    } 
 
 
     it('should work!', async () => {
@@ -58,12 +61,8 @@ describe('/api/returns', () => {
 
     it('return 401 if client is not logged in', async () => {
         
-        // token = ''; // set token to empty string to disable authentication
-        // const res = await exec(server);
-
-        const res = await request(server)
-        .post('/api/returns')
-        .send({customerId, movieId});
+        token = ''; // set token to empty string to disable authentication
+        const res = await exec(server);
 
         expect(res.status).toBe(401)
 
@@ -71,15 +70,8 @@ describe('/api/returns', () => {
 
     it('return 400 if customerId is not provided', async () => {
         
-        token = new User().generateAuthToken();
-
-        // token = ''; // set token to empty string to disable authentication
-        // const res = await exec(server);
-
-        const res = await request(server)
-        .post('/api/returns')
-        .set('x-auth-token', token)
-        .send({movieId});
+        delete payload.customerId;
+        const res = await exec(server);
 
         expect(res.status).toBe(400)
 
@@ -87,15 +79,8 @@ describe('/api/returns', () => {
 
     it('return 400 if movieId is not provided', async () => {
         
-        token = new User().generateAuthToken();
-
-        // token = ''; // set token to empty string to disable authentication
-        // const res = await exec(server);
-
-        const res = await request(server)
-        .post('/api/returns')
-        .set('x-auth-token', token)
-        .send({customerId});
+        delete payload.movieId;
+        const res = await exec(server);
 
         expect(res.status).toBe(400)
 
