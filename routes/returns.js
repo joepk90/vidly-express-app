@@ -5,6 +5,7 @@ const moment = require('moment');
 
 const auth = require('../middleware/auth');
 const {Rental} = require('../models/rental');
+const {Movie} = require('../models/movie');
 
 // test endpoint is working
 router.get('/', async (req, res) => {
@@ -33,7 +34,11 @@ router.post('/', auth, async (req, res) => {
 
     await rental.save();
 
-    
+
+    await Movie.update({ _id: rental.movie._id}, {
+        $inc: {numberInStock: 1}
+    })
+
     return res.status(200).send(rental);
 
 });

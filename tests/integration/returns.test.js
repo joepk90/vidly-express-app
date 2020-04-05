@@ -4,12 +4,14 @@ const moment = require('moment');
 
 const { Rental } = require('../../models/rental');
 const { User } = require('../../models/user');
+const { Movie } = require('../../models/movie');
 
 describe('/api/returns', () => {
 
     let server;
     let customerId;
     let movieId;
+    let movie;
     let rental;
 
 
@@ -18,19 +20,31 @@ describe('/api/returns', () => {
 
         customerId = mongoose.Types.ObjectId();
         movieId = mongoose.Types.ObjectId();
-        token = new User().generateAuthToken();
+        token = new User().generateAuthToken(); 
         payload = { customerId, movieId }
+
+        movie = new Movie({
+            _id: movieId,
+            dailyRentalRate: 2,
+            title: '12345',
+            numberInStock: 1,
+            genre: {
+                name: '12345'
+            }
+        });
+
+        await movie.save();
 
         rental = new Rental({
             customer: {
                 _id: customerId,
                 name: '12345',
-                phone: '123456'
+                phone: '123456',
             },
             movie: {
                 _id: movieId,
+                dailyRentalRate: 2,
                 title: '12345',
-                dailyRentalRate: 2
             }
         });
 
@@ -40,6 +54,7 @@ describe('/api/returns', () => {
     afterEach( async () => {
         await server.close();
         await Rental.remove({});
+        await Movie.remove({});
     });
 
     let token;
@@ -140,6 +155,16 @@ describe('/api/returns', () => {
         savedRental = await Rental.findById(rental._id);
     
         expect(savedRental.rentalFee).toBe(14);
+
+    });
+
+    it('should increase the movie stock', async () => {
+        
+        const res = await exec();
+
+        savedMovie = await Movie.findById(movieId);
+    
+        expect(savedMovie.numberInStock).toBe(movie.numberInStock + 1);
 
     });
 
