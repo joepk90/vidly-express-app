@@ -1,5 +1,6 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const { Rental } = require('../../models/rental');
 const { User } = require('../../models/user');
@@ -126,6 +127,19 @@ describe('/api/returns', () => {
         const diff = new Date() - savedRental.dateReturned;
 
         expect(diff).toBeLessThan(10 * 1000); // check if time difference is less than 10 seconds 
+
+    });
+
+    it('should calculate the rental fee (number of days x movie.dailyRentalRate)', async () => {
+        
+        rental.dateOut = moment().add(-7, 'days').toDate();
+        await rental.save();
+
+        const res = await exec();
+
+        savedRental = await Rental.findById(rental._id);
+    
+        expect(savedRental.rentalFee).toBe(14);
 
     });
 
