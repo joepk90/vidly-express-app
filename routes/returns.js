@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const moment = require('moment');
 const Joi = require('joi');
 
 const auth = require('../middleware/auth');
@@ -26,12 +25,7 @@ router.post('/', [auth, validate(validateReturn)], async (req, res) => {
 
     if(rental.dateReturned) return res.status(400).send('return date is set. movie already returned!');
 
-    rental.dateReturned = new Date();
-
-    const rentalDays = moment().diff(rental.dateOut, 'days');
-
-    rental.rentalFee = rentalDays * rental.movie.dailyRentalRate
-
+    rental.return();
     await rental.save();
 
 
