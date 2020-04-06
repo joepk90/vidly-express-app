@@ -28,13 +28,9 @@ router.post('/', auth, async (req, res) => {
 
     const customer = await Customer.findById(req.body.customerId); 
 
-    console.log(req.body.customerId, customer);
-
     if (!customer) return res.status(400).send('Invalid customer ID');
 
     const movie = await Movie.findById(req.body.movieId);
-
-    console.log(req.body.movieId, movie);
 
     if (!movie) return res.status(400 ).send('Invalid movie ID Test');
 

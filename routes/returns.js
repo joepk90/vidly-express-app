@@ -8,12 +8,6 @@ const validate = require('../middleware/validate');
 const {Rental} = require('../models/rental');
 const {Movie} = require('../models/movie');
 
-
-// test endpoint is working
-router.get('/', async (req, res) => {
-    res.send('I am active!');
-});
-
 router.post('/', [auth, validate(validateReturn)], async (req, res) => {
 
     customerId = req.body.customerId;
