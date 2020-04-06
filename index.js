@@ -7,12 +7,14 @@ const routes = require('./startup/routes');
 const mongodb = require('./startup/mongodb'); 
 const config = require('./startup/config'); 
 const validation = require('./startup/validation'); 
+const prod = require('./startup/prod'); 
 
 logging();
 routes(app);
 mongodb();
 config();
 validation();
+prod(app);
 
 // $ export PORT=5000
 const port = process.env.PORT || 3000
