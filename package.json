@@ -16,7 +16,7 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "bcrypt": "^3.0.6",
     "config": "^1.31.0",
     "debug": "^3.1.0",
@@ -24,7 +24,6 @@
     "express-async-errors": "^3.1.1",
     "fawn": "^2.1.5",
     "helmet": "^3.22.0",
-    "jest": "^25.2.7",
     "joi": "^13.1.0",
     "joi-objectid": "^3.0.1",
     "joi-password-complexity": "^3.1.0",
@@ -34,12 +33,13 @@
     "morgan": "^1.9.0",
     "nodemon": "^1.19.2",
     "pug": "^2.0.0-rc.4",
-    "supertest": "^4.0.2",
     "winston": "^2.4.0",
-    "winston-mongodb": "^3.0.0"
-  },
-  "dependencies": {
+    "winston-mongodb": "^3.0.0",
     "compression": "^1.7.4",
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "jest": "^25.2.7",
+    "supertest": "^4.0.2",
   }
 }
