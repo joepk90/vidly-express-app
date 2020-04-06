@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const moment = require('moment');
+const Joi = require('joi');
 
 const auth = require('../middleware/auth');
 const {Rental} = require('../models/rental');
@@ -17,8 +18,9 @@ router.post('/', auth, async (req, res) => {
     customerId = req.body.customerId;
     movieId = req.body.movieId;
 
-    if (!customerId) return res.status(400).send('no customerId provided');
-    if (!movieId) return res.status(400).send('no movieId provided');
+    // object destructoring
+    const { error } = validateReturn(req.body);
+    if (error) return res.status(400 ).send(error.details[0].message);
 
     const rental = await Rental.findOne({ "customer._id": customerId, "movie._id": movieId });
 
@@ -42,5 +44,17 @@ router.post('/', auth, async (req, res) => {
     return res.status(200).send(rental);
 
 });
+
+function validateReturn(req) {
+
+    // validation using joi dependancy
+    const schema = {
+        customerId: Joi.objectId().required(),
+        movieId: Joi.objectId().required(),
+    }
+
+    return Joi.validate(req, schema);
+
+}
 
 module.exports = router;
