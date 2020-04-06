@@ -26,3 +26,9 @@ to get a users jsonwebtoken, use the user/me endpoint. use the following details
 add the jsonwebtoken as an x-auth-token header key, to make user or admin requests.
 
 use https://jwt.io/ to test valid json web tokens
+
+
+# TODO
+
+  - refactor validater function across route handlers
+  - setup tests for outehr routes
