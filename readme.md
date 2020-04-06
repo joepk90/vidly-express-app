@@ -30,5 +30,8 @@ use https://jwt.io/ to test valid json web tokens
 
 # TODO
 
+  - rental returns do not seem to be working
   - refactor validater function across route handlers
-  - setup tests for outehr routes
+  - setup tests for other routes
+  - winston-mongodb not activee (logging.js)
+

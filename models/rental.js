@@ -50,6 +50,7 @@ rentalSchema.methods.return = function() {
  
     this.dateReturned = new Date();
 
+    // TODO - this does not seem to be working... (on production)
     const rentalDays = moment().diff(this.dateOut, 'days');
     this.rentalFee = rentalDays * this.movie.dailyRentalRate
 
