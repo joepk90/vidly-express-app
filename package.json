@@ -8,7 +8,11 @@
   },
   "scripts": {
     "test": "jest --watchAll --verbose --maxWorkers=1 --coverage",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "12.14.0"
   },
   "author": "",
   "license": "ISC",
