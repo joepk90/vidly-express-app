@@ -5,22 +5,20 @@ const moment = require('moment');
 const Joi = require('joi');
 
 const auth = require('../middleware/auth');
+const validate = require('../middleware/validate');
 const {Rental} = require('../models/rental');
 const {Movie} = require('../models/movie');
+
 
 // test endpoint is working
 router.get('/', async (req, res) => {
     res.send('I am active!');
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', [auth, validate(validateReturn)], async (req, res) => {
 
     customerId = req.body.customerId;
     movieId = req.body.movieId;
-
-    // object destructoring
-    const { error } = validateReturn(req.body);
-    if (error) return res.status(400 ).send(error.details[0].message);
 
     const rental = await Rental.findOne({ "customer._id": customerId, "movie._id": movieId });
 
