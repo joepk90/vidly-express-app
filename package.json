@@ -39,6 +39,7 @@
     "moment": "^2.24.0"
   },
   "devDependencies": {
+    "cors": "^2.8.5",
     "jest": "^25.2.7",
     "supertest": "^4.0.2"
   }
