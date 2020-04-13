@@ -9,9 +9,9 @@ const config = require('config');
 
 module.exports = function(app) {
 
-    if (config.has('enable_CORS') && config.get('enable_CORS' === true)) {
+    // if (config.has('enable_CORS') && config.get('enable_CORS' === true)) {
         const cors = require('cors')
         app.use(cors());
-    }
+    // }
 
 }
