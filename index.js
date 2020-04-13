@@ -2,19 +2,15 @@ const winston = require('winston');
 const express = require('express');
 const app = express();
 
-if (process.env.ENABLE_CORS === true) {
-    const cors = require('cors')
-    app.use(cors());
-}
-
-
 const logging = require('./startup/logging'); 
 const routes = require('./startup/routes'); 
 const mongodb = require('./startup/mongodb'); 
 const config = require('./startup/config'); 
 const validation = require('./startup/validation'); 
 const prod = require('./startup/prod'); 
+const cors = require('./startup/cors'); 
 
+cors(app);
 logging();
 routes(app);
 mongodb();
