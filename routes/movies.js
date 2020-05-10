@@ -81,12 +81,19 @@ router.put('/:id', auth, async (req, res) => {
 
     let movie = null;
 
+    const genre = await Genre.findById(req.body.genreId).select('name id'); // why not do this???
+
+    // const genre = await Genre.findById(req.body.genreId);
+    if (!genre) {
+        return res.status(400).send('Invalid genre');
+    }
+
     try {
 
         // update a document and return it
         movie = await Movie.findByIdAndUpdate( req.params.id, { 
             title: req.body.title,
-            genre: req.body.genre,
+            genre: genre,
             numberInStock: req.body.numberInStock,
             dailyRentalRate: req.body.dailyRentalRate
         }, {
