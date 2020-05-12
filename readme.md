@@ -28,6 +28,22 @@ add the jsonwebtoken as an x-auth-token header key, to make user or admin reques
 use https://jwt.io/ to test valid json web tokens
 
 
+
+React Front End: https://nameless-springs-15732.herokuapp.com/movies
+
+| Key | Value |
+| ------ | ------ |
+| email | user@user.com |
+| password | password12345 |
+| isAdmin | false |
+
+| Key | Value |
+| ------ | ------ |
+| email | admin@admin.com |
+| password | password12345 |
+| isAdmin | true |
+
+
 # TODO
 
   - customers can rent a mobie mutple times but only return once...
