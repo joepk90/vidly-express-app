@@ -3,7 +3,7 @@ const winston = require('winston');
 
 require('express-async-errors'); // handles async errors (see custom middleware async.js module)
 
-const config = require('config');
+// const { db } = require('../utilities/environmentVars');
 
 module.exports = function() {
 
@@ -18,7 +18,7 @@ module.exports = function() {
     // silly
 
     // winston.add(winston.transports.MongoDB, {
-    //     db: config.get('db'),
+    //     db: db,
     //     level: 'error' // only log errros to the mongodb DB
     //     // level: 'info' // if info is set, info, warn and error messages would be logged to the mongodb DB 
     //     // level: 'silly' // if silly is set, all errors would be logged to mongodb DB 

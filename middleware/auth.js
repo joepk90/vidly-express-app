@@ -1,5 +1,5 @@
-const config = require('config');
 const jwt = require('jsonwebtoken');
+const { jwtPrivateKey } = require('./../utilities/environmentVars');
 
 function auth(req, res, next) {
 
@@ -12,7 +12,7 @@ function auth(req, res, next) {
     try {
 
         // get user data created by the generateAuthToken
-        const user = jwt.verify(token, config.get('jwtPrivateKey'));
+        const user = jwt.verify(token, jwtPrivateKey);
 
          // assign user data to the request object
         req.user = user;

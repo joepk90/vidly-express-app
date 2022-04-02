@@ -1,7 +1,7 @@
 const { User } = require('../../../models/user.js');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const mongoose = require('mongoose');
+const { jwtPrivateKey } = require('./../utilities/environmentVars');
 
 describe('user.generateAuthToken', () => {
     it('should return a valid json webtoken', () => {
@@ -18,7 +18,7 @@ describe('user.generateAuthToken', () => {
         const token = user.generateAuthToken(); // will convert json web token to hexidecimal string
 
         // decode using jsonwebtoken dependancy
-        const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
+        const decoded = jwt.verify(token, jwtPrivateKey);
 
         // confirm decoded object matches return generated auth token from the user.generateAuthToken method
         expect(decoded).toMatchObject(payload); 

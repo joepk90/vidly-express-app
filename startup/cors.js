@@ -1,5 +1,5 @@
 
-const config = require('config');
+// const { enableCORS } = require('../utilities/environmentVars');
 
 /**
  * NEEDS REFACTORING
@@ -9,9 +9,9 @@ const config = require('config');
 
 module.exports = function(app) {
 
-    // if (config.has('enable_CORS') && config.get('enable_CORS' === true)) {
-        const cors = require('cors')
-        app.use(cors());
+    // if (enableCORS === true) {
+    const cors = require('cors')
+    app.use(cors());
     // }
 
 }

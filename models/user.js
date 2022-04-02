@@ -1,8 +1,8 @@
-const config = require('config');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Joi = require('joi');
 const JoiPasswordComplexity = require('joi-password-complexity');
+const { jwtPrivateKey } = require('./../utilities/environmentVars');
 
 const userSchemaProperties = {
     name: { 
@@ -49,7 +49,7 @@ userSchema.methods.generateAuthToken = function() {
             email: this.email,
             isAdmin: this.isAdmin
         },
-        config.get('jwtPrivateKey')
+        jwtPrivateKey
     );
 
 }
