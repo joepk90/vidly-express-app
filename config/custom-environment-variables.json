@@ -1,5 +1,0 @@
-{
-    "jwtPrivateKey": "vidly_jwtPrivateKey",
-    "db": "vidly_db",
-    "enable_CORS": "enable_CORS"
-}   
