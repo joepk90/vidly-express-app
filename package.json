@@ -18,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "compression": "^1.7.4",
     "config": "^1.31.0",
+    "cors": "^2.8.5",
     "debug": "^3.1.0",
     "dotenv": "^16.0.0",
     "express": "^4.16.2",
@@ -30,15 +32,13 @@
     "joi-password-complexity": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "mongoose": "^5.0.2",
     "morgan": "^1.9.0",
     "nodemon": "^1.19.2",
     "pug": "^2.0.0-rc.4",
     "winston": "^2.4.0",
-    "winston-mongodb": "^3.0.0",
-    "compression": "^1.7.4",
-    "moment": "^2.24.0",
-    "cors": "^2.8.5"
+    "winston-mongodb": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^25.2.7",
