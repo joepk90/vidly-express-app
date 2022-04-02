@@ -19,7 +19,6 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "compression": "^1.7.4",
-    "config": "^1.31.0",
     "cors": "^2.8.5",
     "debug": "^3.1.0",
     "dotenv": "^16.0.0",
